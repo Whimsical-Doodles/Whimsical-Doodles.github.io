@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title> Scurty Basics </title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- syntax highlighting CSS -->
+<link rel="stylesheet" href="/css/syntax.css">
+
+<!-- Bootstrap core CSS -->
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link rel="stylesheet" href="/css/main.css">
+
+</head>
+<body>
+
+<div class="container">
+
+  <div class="col-sm-3">
+    <a href="/index.html">
+      <img id="about" src="/img/logo.jpg" height="128px" width="128px" />
+    </a>
+    
+
+    
+  </div>
+
+  <div class="col-sm-8 col-offset-1">
+
+    <h1 id="scurty">S'cur'ty</h1>
+
+<p><img src="https://github.com/Whimsical-Doodles/presentations/raw/master/images/scurty.gif" alt="alt text" title="Hacking gif" /></p>
+
+<h2 id="a-brief-introduction-to-how-and-why-it-will-go-wrong">A brief introduction to how and why it will go wrong</h2>
+
+<p>Security should always be present in your mind because it will be on someone else’s. Even if you feel your site or service would not be a target for intentional hacking: do not relax. Many of the high stakes attacks on bank accounts, for instance, frequently start with hacks on low risk, low security sites. Not only do you tend to trust machines within your network more than others so once in havoc can be wreaked but MyFavouriteKitty.com may not handle your finances but many people use the same email address and a similar enough password to do their banking so hacking one site can mean walking into the next.</p>
+
+<hr />
+
+<h2 id="we-have-a-sea-of-internet-traffic-and-there-be-pirates-looking-for-your-ports">We have a sea of internet traffic, and there be pirates looking for your ports</h2>
+
+<h3 id="port-and-url-scanning">port and url scanning</h3>
+
+<p><img src="https://github.com/Whimsical-Doodles/presentations/raw/master/images/pirate.gif" alt="alt text" title="Boaty gif" /></p>
+
+<p>Tools like (ze)nmap give you an immediate look at a specific host or network and frameworks like metasploit use this to then suggest possible attack vectors after determining open ports and generally which software is providing a service and what version that software is. This approach can be completely arbitrary (ie. a port scan across the internet picking up your open box) or highly targeted (ie. once you have penetrated a network you can craft specific scans of servers to build both a host-to-service list and network topology). The main attack surface of web apps are of course the url responses and there are many dictionary url scanners (a good one is skipfish) that attempt to find responses from unlisted addresses in order to both gather more info and see if you have hidden useful pages.</p>
+
+<p><a href="http://map.ipviking.com/">Live attack map</a></p>
+
+<p><a href="http://cseweb.ucsd.edu/~clbailey/PortScans.pdf">Port scan theory</a></p>
+
+<hr />
+
+<h2 id="know-your-friends-close-thine-commoners-and-the-revolt-your-enemy">Know your friends, close thine commoners and the revolt your enemy</h2>
+
+<h3 id="fuzz-testing">fuzz testing</h3>
+
+<p><img src="https://github.com/Whimsical-Doodles/presentations/raw/master/images/parp.gif" alt="alt text" title="Parp gif" /></p>
+
+<p>There are a bunch of fuzz testing tools, some open source, many proprietary but the premise is the same. Approach the valid endpoints of an application with arbitrary and often erroneous data and see what happens. Normally, not a lot, an error message (which can be useful too) or a blank response, but make enough of them in various forms and exceptions to the rule can be an opening. Lets say one of your inbound endpoints accepts POSTed xml, parses it, stores it then passes it to a worker to be processed. This may come from a trusted source and be filtered at the network level but what happens if that source is compromised. How does your application handle a million randomly crafted xml files? What responses does it give to malformed xml? Even GET requests with bonkers parameters can sometimes cause your app to behave unpredictably with the right data. Until recently rails did not handle certain things well; running fuzz tests against endpoints that at some point created a symbol from a parameter would bring down the server as symbols weren’t garbage collected until Ruby 2.2 ( 25 Dec 2014).</p>
+
+<p><a href="https://code.google.com/p/zaproxy/wiki/HelpStartConceptsFuzz">Zaproxy fuzz guide</a></p>
+
+<p><a href="https://www.owasp.org/index.php/Fuzzing_with_WebScarab">Webscarab fuzz guide</a></p>
+
+<p><a href="http://pages.cs.wisc.edu/~bart/fuzz/">Fuzz theory</a></p>
+
+<hr />
+
+<h2 id="dropping-the-ball">Dropping the ball</h2>
+
+<h3 id="sql-injection">SQL injection</h3>
+
+<p><img src="https://github.com/Whimsical-Doodles/presentations/raw/master/images/bobby.png" alt="alt text" title="Bobby tables" /></p>
+
+<p>Hopefully this vulnerability is something that we are all aware of and one that doesn’t need to be covered in detail… Until the next time you hand write a piece of SQL, which at some point somebody will. ORMs and the like have made us fear this problem much less than in the past. Perl, then later, PHPs popularity in dynamic web development and their associated propensity for string interpolation lead to hilariously simple attacks. Typing in an apostrophe, a semi-colon and then some easily guessed SQL could give you entire customer databases. So remember as soon as you are hand writing SQL sanitize EVERYTHING, even if you can’t immediately see how an attacker could fill that field with some Bobby Tables fun.</p>
+
+<p><a href="http://codecurmudgeon.com/wp/sql-injection-hall-of-shame/">SQL Injection Hall of Shame</a></p>
+
+<hr />
+
+<h2 id="the-good-the-bad-and-the-very-very-cross">The Good, The Bad and The Very Very Cross</h2>
+
+<h3 id="xss-attacks">XSS attacks</h3>
+
+<p><img src="https://github.com/Whimsical-Doodles/presentations/raw/master/images/angry.gif" alt="alt text" title="Angry gif" /></p>
+
+<p>Cross site scripting is the cause of irritation, fraud, fake likes and another damn good reason to remember to sanitise any data from a user, including headers and urls. There are several types of attack that come under this heading, non-persistent being the simplest: Having a parameter of a url rendered straight to the next page (eg. puts “Hello #{params[:name]}”) without sanitisation allows someone else to create a url that can execute their javascript on your page in the clickers context. Many web frameworks automatically sanitise this input and provide meta tokens to mitigate various types of attack, but they are not infallible and you need to remember that this can happen. The second main category is when your inputs aren’t fully sanitised before storage either. eg. Leaving a comment on a blog post that contains javascript that’s rendered to other users; can be used for all sorts of tomfoolery. The final main type of XSS is DOM based, using a similar vector to modify the responses of javascript to trigger events in the browsers rendered page. Many modern attacks based on this use a melange of techniques and play around with things like double encoding and the like to bypass attempts to suppress them.</p>
+
+<p><a href="http://html5sec.org/">HTML5 Security</a></p>
+
+<p><a href="https://www.exploit-db.com/papers/13102/">XSS theory</a></p>
+
+<p><a href="http://www.slideshare.net/x00mario/the-innerhtml-apocalypse">InnerHTML XSS</a></p>
+
+<p><a href="https://www.owasp.org/index.php/Types_of_Cross-Site_Scripting">OWASP XSS</a></p>
+
+<hr />
+
+<h2 id="crazy-horses-and-warewolves">Crazy horses and warewolves</h2>
+
+<h3 id="trojans-malware-hijackware-ransomware-casualwear">trojans, malware, hijackware, ransomware, casualwear</h3>
+
+<p><img src="https://github.com/Whimsical-Doodles/presentations/raw/master/images/osmonds.gif" alt="alt text" title="Osmonds gif" /></p>
+
+<p>Crafted install packages can infect any machine regardless of OS or setup. If you install code as you or a priviledged account that code can execute anything you could. You should only install from verified sources, and even then you need to regularly check that there are not broadcast security vulnerabilities in the verified code. Security auditing your open source libraries sounds immensely tedious but it is usually easily automated as many companies have to do so for compliance purposes. This was a lessening issue in the *nix world with authenticated fingerprinted package managers (debian repos/appstore) but the recent popularity of blindly installing from urls or containerised versions of apps have lead to a resurgence of infections.</p>
+
+<p><a href="https://github.com/rubysec/bundler-audit">Bundle audit</a></p>
+
+<p><a href="http://www.offensive-security.com/metasploit-unleashed/Binary_Linux_Trojan">Linux Trojan</a></p>
+
+<hr />
+
+<h2 id="for-the-net-to-work-you-cant-have-too-many-fish">For the net to work you can’t have too many fish</h2>
+
+<h3 id="network-level-attacks-ddos">Network level attacks, DDOS</h3>
+
+<p><img src="https://github.com/Whimsical-Doodles/presentations/raw/master/images/nope.gif" alt="alt text" title="Angry gif" /></p>
+
+<p>So far we’ve mainly talked about hacks that target gaining access to your systems or your data (technically cracking) however often the attack is more about disruption. Distributed Denial Of Service attacks are very common, sometimes politically motivated and near impossible to mitigate without vast resource expenditure. Attacks vary from thousands of slow persistent connections to blasting away with millions of throwaway requests until a server just gives up. Intelligent rate limiting, automated blacklisting and cdn services like cloudflare can help but all but the most potent sites will die under sustained attack from a large botnet.</p>
+
+<p><a href="http://www.digitalattackmap.com/">Another live map</a></p>
+
+<p><a href="https://www.us-cert.gov/sites/default/files/publications/DNS-recursion033006.pdf">DNS attack theory</a></p>
+
+<hr />
+
+<h2 id="your-only-as-strong-as-your-weakest-urlfor">Your only as <strong> as your weakest url_for</strong></h2>
+
+<h3 id="social-engineering-and-weak-link-devices">Social engineering and weak link devices</h3>
+
+<p><img src="https://github.com/Whimsical-Doodles/presentations/raw/master/images/comeatme.gif" alt="alt text" title="Link gif" /></p>
+
+<p>The only attack vectors that have a roughly 90% success rate are social engineering and commodity network hardware. One of my favourite security speakers came to a conference he wasn’t invited to and gave a lightning talk on how to gain access to a conference using social engineering, showing his press pass and the 4 emails it had taken to get a free ticket to a $3000 conference. Pretty much every mainstream wireless router manufacturer has had some form of embarrassing vulnerability exposed over the last decade and that does not seem to be improving. And with regards to bad user practice combined with poor network hardware security leading to quite chilling results.</p>
+
+<p><a href="http://www.networkworld.com/article/2844283/microsoft-subnet/peeping-into-73-000-unsecured-security-cameras-thanks-to-default-passwords.html">Scary camera security</a></p>
+
+<p><a href="http://www.theregister.co.uk/2015/03/05/broadband_routers_sohopeless_and_vendors_dont_care/">Router security</a></p>
+
+<p><a href="http://www.techrepublic.com/blog/it-security/securitys-weakest-link-technology-no-match-for-social-engineering/">Social Engineering</a></p>
+
+<hr />
+
+<h2 id="example-tools">Example tools</h2>
+
+<p><a href="https://code.google.com/p/zaproxy/wiki/Docker">Zaproxy on docker</a></p>
+
+<p><a href="https://www.owasp.org/index.php/Appendix_A:_Testing_Tools">OWASP Tools</a></p>
+
+<p><a href="http://portswigger.net/burp/intruder.html">Burp</a></p>
+
+<p><a href="https://nmap.org/zenmap/">Zenmap</a></p>
+
+<p><a href="http://metasploit.com">Metasploit</a></p>
+
+<p><a href="https://code.google.com/p/skipfish/">Skipfish</a></p>
+
+<p><a href="https://www.kali.org/">Kali Linux</a></p>
+
+<p><a href="http://sourceforge.net/projects/metasploitable/files/Metasploitable2/">Metaspoitable</a></p>
+
+<hr />
+
+<h2 id="a-good-place-to-start">A good place to start</h2>
+
+<p><a href="/files/hacking.pdf">Beginners Hacking on Metasploit</a></p>
+
+<hr />
+
+<h1 id="the-end">THE END</h1>
+
+
+    <footer>
+      &copy; Whimsical Doodles
+      
+      - <a href="http://www.github.com/Whimsical-Doodles">Whimsical-Doodles</a>
+      
+      
+      - <a href="http://www.twitter.com/wwwhimsydoodle">wwwhimsydoodle</a>
+      
+    </footer>
+  </div>
+
+</div>
+
+<!-- Bootstrap core JavaScript
+    ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>

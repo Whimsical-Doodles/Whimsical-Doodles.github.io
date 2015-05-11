@@ -6,9 +6,160 @@
 </description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 11 May 2015 15:43:16 +0100</pubDate>
-    <lastBuildDate>Mon, 11 May 2015 15:43:16 +0100</lastBuildDate>
+    <pubDate>Mon, 11 May 2015 17:31:03 +0100</pubDate>
+    <lastBuildDate>Mon, 11 May 2015 17:31:03 +0100</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
+    
+      <item>
+        <title>Scurty Basics</title>
+        <description>&lt;h1 id=&quot;scurty&quot;&gt;S&#39;cur&#39;ty&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/Whimsical-Doodles/presentations/raw/master/images/scurty.gif&quot; alt=&quot;alt text&quot; title=&quot;Hacking gif&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;a-brief-introduction-to-how-and-why-it-will-go-wrong&quot;&gt;A brief introduction to how and why it will go wrong&lt;/h2&gt;
+
+&lt;p&gt;Security should always be present in your mind because it will be on someone else’s. Even if you feel your site or service would not be a target for intentional hacking: do not relax. Many of the high stakes attacks on bank accounts, for instance, frequently start with hacks on low risk, low security sites. Not only do you tend to trust machines within your network more than others so once in havoc can be wreaked but MyFavouriteKitty.com may not handle your finances but many people use the same email address and a similar enough password to do their banking so hacking one site can mean walking into the next.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;we-have-a-sea-of-internet-traffic-and-there-be-pirates-looking-for-your-ports&quot;&gt;We have a sea of internet traffic, and there be pirates looking for your ports&lt;/h2&gt;
+
+&lt;h3 id=&quot;port-and-url-scanning&quot;&gt;port and url scanning&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/Whimsical-Doodles/presentations/raw/master/images/pirate.gif&quot; alt=&quot;alt text&quot; title=&quot;Boaty gif&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Tools like (ze)nmap give you an immediate look at a specific host or network and frameworks like metasploit use this to then suggest possible attack vectors after determining open ports and generally which software is providing a service and what version that software is. This approach can be completely arbitrary (ie. a port scan across the internet picking up your open box) or highly targeted (ie. once you have penetrated a network you can craft specific scans of servers to build both a host-to-service list and network topology). The main attack surface of web apps are of course the url responses and there are many dictionary url scanners (a good one is skipfish) that attempt to find responses from unlisted addresses in order to both gather more info and see if you have hidden useful pages.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://map.ipviking.com/&quot;&gt;Live attack map&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://cseweb.ucsd.edu/~clbailey/PortScans.pdf&quot;&gt;Port scan theory&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;know-your-friends-close-thine-commoners-and-the-revolt-your-enemy&quot;&gt;Know your friends, close thine commoners and the revolt your enemy&lt;/h2&gt;
+
+&lt;h3 id=&quot;fuzz-testing&quot;&gt;fuzz testing&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/Whimsical-Doodles/presentations/raw/master/images/parp.gif&quot; alt=&quot;alt text&quot; title=&quot;Parp gif&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;There are a bunch of fuzz testing tools, some open source, many proprietary but the premise is the same. Approach the valid endpoints of an application with arbitrary and often erroneous data and see what happens. Normally, not a lot, an error message (which can be useful too) or a blank response, but make enough of them in various forms and exceptions to the rule can be an opening. Lets say one of your inbound endpoints accepts POSTed xml, parses it, stores it then passes it to a worker to be processed. This may come from a trusted source and be filtered at the network level but what happens if that source is compromised. How does your application handle a million randomly crafted xml files? What responses does it give to malformed xml? Even GET requests with bonkers parameters can sometimes cause your app to behave unpredictably with the right data. Until recently rails did not handle certain things well; running fuzz tests against endpoints that at some point created a symbol from a parameter would bring down the server as symbols weren’t garbage collected until Ruby 2.2 ( 25 Dec 2014).&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://code.google.com/p/zaproxy/wiki/HelpStartConceptsFuzz&quot;&gt;Zaproxy fuzz guide&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.owasp.org/index.php/Fuzzing_with_WebScarab&quot;&gt;Webscarab fuzz guide&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://pages.cs.wisc.edu/~bart/fuzz/&quot;&gt;Fuzz theory&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;dropping-the-ball&quot;&gt;Dropping the ball&lt;/h2&gt;
+
+&lt;h3 id=&quot;sql-injection&quot;&gt;SQL injection&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/Whimsical-Doodles/presentations/raw/master/images/bobby.png&quot; alt=&quot;alt text&quot; title=&quot;Bobby tables&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Hopefully this vulnerability is something that we are all aware of and one that doesn’t need to be covered in detail… Until the next time you hand write a piece of SQL, which at some point somebody will. ORMs and the like have made us fear this problem much less than in the past. Perl, then later, PHPs popularity in dynamic web development and their associated propensity for string interpolation lead to hilariously simple attacks. Typing in an apostrophe, a semi-colon and then some easily guessed SQL could give you entire customer databases. So remember as soon as you are hand writing SQL sanitize EVERYTHING, even if you can’t immediately see how an attacker could fill that field with some Bobby Tables fun.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://codecurmudgeon.com/wp/sql-injection-hall-of-shame/&quot;&gt;SQL Injection Hall of Shame&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;the-good-the-bad-and-the-very-very-cross&quot;&gt;The Good, The Bad and The Very Very Cross&lt;/h2&gt;
+
+&lt;h3 id=&quot;xss-attacks&quot;&gt;XSS attacks&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/Whimsical-Doodles/presentations/raw/master/images/angry.gif&quot; alt=&quot;alt text&quot; title=&quot;Angry gif&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Cross site scripting is the cause of irritation, fraud, fake likes and another damn good reason to remember to sanitise any data from a user, including headers and urls. There are several types of attack that come under this heading, non-persistent being the simplest: Having a parameter of a url rendered straight to the next page (eg. puts “Hello #{params[:name]}”) without sanitisation allows someone else to create a url that can execute their javascript on your page in the clickers context. Many web frameworks automatically sanitise this input and provide meta tokens to mitigate various types of attack, but they are not infallible and you need to remember that this can happen. The second main category is when your inputs aren’t fully sanitised before storage either. eg. Leaving a comment on a blog post that contains javascript that’s rendered to other users; can be used for all sorts of tomfoolery. The final main type of XSS is DOM based, using a similar vector to modify the responses of javascript to trigger events in the browsers rendered page. Many modern attacks based on this use a melange of techniques and play around with things like double encoding and the like to bypass attempts to suppress them.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://html5sec.org/&quot;&gt;HTML5 Security&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.exploit-db.com/papers/13102/&quot;&gt;XSS theory&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.slideshare.net/x00mario/the-innerhtml-apocalypse&quot;&gt;InnerHTML XSS&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.owasp.org/index.php/Types_of_Cross-Site_Scripting&quot;&gt;OWASP XSS&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;crazy-horses-and-warewolves&quot;&gt;Crazy horses and warewolves&lt;/h2&gt;
+
+&lt;h3 id=&quot;trojans-malware-hijackware-ransomware-casualwear&quot;&gt;trojans, malware, hijackware, ransomware, casualwear&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/Whimsical-Doodles/presentations/raw/master/images/osmonds.gif&quot; alt=&quot;alt text&quot; title=&quot;Osmonds gif&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Crafted install packages can infect any machine regardless of OS or setup. If you install code as you or a priviledged account that code can execute anything you could. You should only install from verified sources, and even then you need to regularly check that there are not broadcast security vulnerabilities in the verified code. Security auditing your open source libraries sounds immensely tedious but it is usually easily automated as many companies have to do so for compliance purposes. This was a lessening issue in the *nix world with authenticated fingerprinted package managers (debian repos/appstore) but the recent popularity of blindly installing from urls or containerised versions of apps have lead to a resurgence of infections.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/rubysec/bundler-audit&quot;&gt;Bundle audit&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.offensive-security.com/metasploit-unleashed/Binary_Linux_Trojan&quot;&gt;Linux Trojan&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;for-the-net-to-work-you-cant-have-too-many-fish&quot;&gt;For the net to work you can’t have too many fish&lt;/h2&gt;
+
+&lt;h3 id=&quot;network-level-attacks-ddos&quot;&gt;Network level attacks, DDOS&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/Whimsical-Doodles/presentations/raw/master/images/nope.gif&quot; alt=&quot;alt text&quot; title=&quot;Angry gif&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;So far we’ve mainly talked about hacks that target gaining access to your systems or your data (technically cracking) however often the attack is more about disruption. Distributed Denial Of Service attacks are very common, sometimes politically motivated and near impossible to mitigate without vast resource expenditure. Attacks vary from thousands of slow persistent connections to blasting away with millions of throwaway requests until a server just gives up. Intelligent rate limiting, automated blacklisting and cdn services like cloudflare can help but all but the most potent sites will die under sustained attack from a large botnet.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.digitalattackmap.com/&quot;&gt;Another live map&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.us-cert.gov/sites/default/files/publications/DNS-recursion033006.pdf&quot;&gt;DNS attack theory&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;your-only-as-strong-as-your-weakest-urlfor&quot;&gt;Your only as &lt;strong&gt; as your weakest url_for&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;h3 id=&quot;social-engineering-and-weak-link-devices&quot;&gt;Social engineering and weak link devices&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/Whimsical-Doodles/presentations/raw/master/images/comeatme.gif&quot; alt=&quot;alt text&quot; title=&quot;Link gif&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The only attack vectors that have a roughly 90% success rate are social engineering and commodity network hardware. One of my favourite security speakers came to a conference he wasn’t invited to and gave a lightning talk on how to gain access to a conference using social engineering, showing his press pass and the 4 emails it had taken to get a free ticket to a $3000 conference. Pretty much every mainstream wireless router manufacturer has had some form of embarrassing vulnerability exposed over the last decade and that does not seem to be improving. And with regards to bad user practice combined with poor network hardware security leading to quite chilling results.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.networkworld.com/article/2844283/microsoft-subnet/peeping-into-73-000-unsecured-security-cameras-thanks-to-default-passwords.html&quot;&gt;Scary camera security&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.theregister.co.uk/2015/03/05/broadband_routers_sohopeless_and_vendors_dont_care/&quot;&gt;Router security&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.techrepublic.com/blog/it-security/securitys-weakest-link-technology-no-match-for-social-engineering/&quot;&gt;Social Engineering&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;example-tools&quot;&gt;Example tools&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://code.google.com/p/zaproxy/wiki/Docker&quot;&gt;Zaproxy on docker&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.owasp.org/index.php/Appendix_A:_Testing_Tools&quot;&gt;OWASP Tools&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://portswigger.net/burp/intruder.html&quot;&gt;Burp&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://nmap.org/zenmap/&quot;&gt;Zenmap&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://metasploit.com&quot;&gt;Metasploit&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://code.google.com/p/skipfish/&quot;&gt;Skipfish&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.kali.org/&quot;&gt;Kali Linux&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://sourceforge.net/projects/metasploitable/files/Metasploitable2/&quot;&gt;Metaspoitable&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;a-good-place-to-start&quot;&gt;A good place to start&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;/files/hacking.pdf&quot;&gt;Beginners Hacking on Metasploit&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;the-end&quot;&gt;THE END&lt;/h1&gt;
+</description>
+        <pubDate>Mon, 11 May 2015 00:00:00 +0100</pubDate>
+        <link>/2015/05/11/scurty-basics.html</link>
+        <guid isPermaLink="true">/2015/05/11/scurty-basics.html</guid>
+        
+        
+      </item>
     
   </channel>
 </rss>
