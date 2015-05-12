@@ -6,20 +6,9 @@
 </description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 12 May 2015 10:12:00 +0100</pubDate>
-    <lastBuildDate>Tue, 12 May 2015 10:12:00 +0100</lastBuildDate>
+    <pubDate>Tue, 12 May 2015 10:12:48 +0100</pubDate>
+    <lastBuildDate>Tue, 12 May 2015 10:12:48 +0100</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
-    
-      <item>
-        <title>Foo</title>
-        <description>
-</description>
-        <pubDate>Tue, 12 May 2015 00:00:00 +0100</pubDate>
-        <link>/2015/05/12/foo.html</link>
-        <guid isPermaLink="true">/2015/05/12/foo.html</guid>
-        
-        
-      </item>
     
       <item>
         <title>Scurty Basics</title>
