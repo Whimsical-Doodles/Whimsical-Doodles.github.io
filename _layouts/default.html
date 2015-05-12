@@ -18,40 +18,35 @@
 
 </head>
 <body>
+<div class="text-center">
+  <a href="{{ site.baseurl }}/index.html">
+    <img id="about" src="{{ site.baseurl }}/img/logo.png" height="128px" width="" />
+  </a>
+</div>
 
-<div class="container-fluid">
-  <div class="col-md-1 text-center">
-    <a href="{{ site.baseurl }}/index.html">
-      <img id="about" src="{{ site.baseurl }}/img/logo.png" height="128px" width="" />
-    </a>
-  </div>
+<div class="">
+  {% for i in site.urls %}
+  <a class="about" href="{{ i.url }}">
+    {{ i.text }}
+  </a>
+  {% endfor %}
+</div>
 
-  <div class="col-md-1">
-    {% for i in site.urls %}
-    <a class="about" href="{{ i.url }}">
-      {{ i.text }}
-    </a>
-    {% endfor %}
-  </div>
 
-  <div class="col-md-1 text-center">
+<div class="container-fluid text-center">
+  {{ content }}
+</div>
 
-    {{ content }}
-
-  </div>
-
-  <div class="col-md-1 text-center">
-    <footer>
-      &copy; {{ site.title }}
-      {% if site.github %}
-      - <a href="http://www.github.com/{{ site.github }}">{{ site.github }}</a>
-      {% endif %}
-      {% if site.twitter %}
-      - <a href="http://www.twitter.com/{{ site.twitter }}">{{ site.twitter }}</a>
-      {% endif %}
-    </footer>
-  </div>
-
+<div class="text-center">
+  <footer>
+    &copy; {{ site.title }}
+    {% if site.github %}
+    - <a href="http://www.github.com/{{ site.github }}">{{ site.github }}</a>
+    {% endif %}
+    {% if site.twitter %}
+    - <a href="http://www.twitter.com/{{ site.twitter }}">{{ site.twitter }}</a>
+    {% endif %}
+  </footer>
 </div>
 
 <!-- Bootstrap core JavaScript
