@@ -6,8 +6,8 @@
 </description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 12 May 2015 12:25:29 +0100</pubDate>
-    <lastBuildDate>Tue, 12 May 2015 12:25:29 +0100</lastBuildDate>
+    <pubDate>Tue, 12 May 2015 17:23:37 +0100</pubDate>
+    <lastBuildDate>Tue, 12 May 2015 17:23:37 +0100</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
     
       <item>
@@ -18,7 +18,7 @@
 
 &lt;h2 id=&quot;a-brief-introduction-to-how-and-why-it-will-go-wrong&quot;&gt;A brief introduction to how and why it will go wrong&lt;/h2&gt;
 
-&lt;p&gt;Security should always be present in your mind because it will be on someone else’s. Even if you feel your site or service would not be a target for intentional hacking: do not relax. Many of the high stakes attacks on bank accounts, for instance, frequently start with hacks on low risk, low security sites. Not only do you tend to trust machines within your network more than others so once in havoc can be wreaked but MyFavouriteKitty.com may not handle your finances but many people use the same email address and a similar enough password to do their banking so hacking one site can mean walking into the next.&lt;/p&gt;
+&lt;p&gt;Security should always be present in your mind because it will be on someone else’s. Even if you feel your site or service would not be a target for intentional hacking: do not relax. Many of the high stakes attacks on bank accounts, for instance, frequently start with hacks on low risk, low security sites. You also tend to trust machines within your network more than others, so once in side your firewall, havoc can be wreaked. MyFavouriteKitty.com may not handle your finances but many people use the same email address and a similar enough password to do their banking so hacking one site can mean walking into the next.&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -110,11 +110,30 @@
 
 &lt;hr /&gt;
 
+&lt;h2 id=&quot;clowns-to-the-left-of-me-jokers-to-the-right-here-i-am-stuck-in-the-middle-with-you&quot;&gt;Clowns to the left of me jokers to the right, here I am stuck in the middle with you&lt;/h2&gt;
+
+&lt;h2 id=&quot;man-in-the-middle-attacks&quot;&gt;Man-In-The-Middle Attacks&lt;/h2&gt;
+
+&lt;p&gt;Another potentially network and potentially higher level attack is acting as a proxy for valid
+communication. This can be particularly problematic as the attack is often invisible until access
+has already been granted with the full users credentials and all communication decrypted. If you
+ever been to a large open source conference you’ll have seen listings of “Key-Signing Party”s or
+the like. This face-2-face validated handover of keys is one of the means to protect from someone
+intercepting your traffic and forwarding all further traffic as you but with their keys. Other
+approaches to mitigate this can be down down at the network level with secure dns preventing the
+hijacking of hostnames or at the application level with multiple factor authentication and other
+token based systems.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://help.ubuntu.com/community/Upside-Down-TernetHowTo&quot;&gt;Upside-Down-Ternet&lt;/a&gt;
+&lt;a href=&quot;http://en.wikipedia.org/wiki/Quantum_cryptography&quot;&gt;Quantum cryptography&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
 &lt;h2 id=&quot;your-only-as-strong-as-your-weakest-urlfor&quot;&gt;Your only as &lt;strong&gt; as your weakest url_for&lt;/strong&gt;&lt;/h2&gt;
 
 &lt;h3 id=&quot;social-engineering-and-weak-link-devices&quot;&gt;Social engineering and weak link devices&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://github.com/Whimsical-Doodles/presentations/raw/master/images/comeatme.gif&quot; alt=&quot;alt text&quot; title=&quot;Link gif&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://whimsical-doodles.github.io/img/clown.gif&quot; alt=&quot;alt text&quot; title=&quot;Link gif&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The only attack vectors that have a roughly 90% success rate are social engineering and commodity network hardware. One of my favourite security speakers came to a conference he wasn’t invited to and gave a lightning talk on how to gain access to a conference using social engineering, showing his press pass and the 4 emails it had taken to get a free ticket to a $3000 conference. Pretty much every mainstream wireless router manufacturer has had some form of embarrassing vulnerability exposed over the last decade and that does not seem to be improving. And with regards to bad user practice combined with poor network hardware security leading to quite chilling results.&lt;/p&gt;
 

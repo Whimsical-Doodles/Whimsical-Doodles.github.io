@@ -36,7 +36,7 @@
 
 <h2 id="a-brief-introduction-to-how-and-why-it-will-go-wrong">A brief introduction to how and why it will go wrong</h2>
 
-<p>Security should always be present in your mind because it will be on someone else’s. Even if you feel your site or service would not be a target for intentional hacking: do not relax. Many of the high stakes attacks on bank accounts, for instance, frequently start with hacks on low risk, low security sites. Not only do you tend to trust machines within your network more than others so once in havoc can be wreaked but MyFavouriteKitty.com may not handle your finances but many people use the same email address and a similar enough password to do their banking so hacking one site can mean walking into the next.</p>
+<p>Security should always be present in your mind because it will be on someone else’s. Even if you feel your site or service would not be a target for intentional hacking: do not relax. Many of the high stakes attacks on bank accounts, for instance, frequently start with hacks on low risk, low security sites. You also tend to trust machines within your network more than others, so once in side your firewall, havoc can be wreaked. MyFavouriteKitty.com may not handle your finances but many people use the same email address and a similar enough password to do their banking so hacking one site can mean walking into the next.</p>
 
 <hr />
 
@@ -128,11 +128,30 @@
 
 <hr />
 
+<h2 id="clowns-to-the-left-of-me-jokers-to-the-right-here-i-am-stuck-in-the-middle-with-you">Clowns to the left of me jokers to the right, here I am stuck in the middle with you</h2>
+
+<h2 id="man-in-the-middle-attacks">Man-In-The-Middle Attacks</h2>
+
+<p>Another potentially network and potentially higher level attack is acting as a proxy for valid
+communication. This can be particularly problematic as the attack is often invisible until access
+has already been granted with the full users credentials and all communication decrypted. If you
+ever been to a large open source conference you’ll have seen listings of “Key-Signing Party”s or
+the like. This face-2-face validated handover of keys is one of the means to protect from someone
+intercepting your traffic and forwarding all further traffic as you but with their keys. Other
+approaches to mitigate this can be down down at the network level with secure dns preventing the
+hijacking of hostnames or at the application level with multiple factor authentication and other
+token based systems.</p>
+
+<p><a href="https://help.ubuntu.com/community/Upside-Down-TernetHowTo">Upside-Down-Ternet</a>
+<a href="http://en.wikipedia.org/wiki/Quantum_cryptography">Quantum cryptography</a></p>
+
+<hr />
+
 <h2 id="your-only-as-strong-as-your-weakest-urlfor">Your only as <strong> as your weakest url_for</strong></h2>
 
 <h3 id="social-engineering-and-weak-link-devices">Social engineering and weak link devices</h3>
 
-<p><img src="https://github.com/Whimsical-Doodles/presentations/raw/master/images/comeatme.gif" alt="alt text" title="Link gif" /></p>
+<p><img src="http://whimsical-doodles.github.io/img/clown.gif" alt="alt text" title="Link gif" /></p>
 
 <p>The only attack vectors that have a roughly 90% success rate are social engineering and commodity network hardware. One of my favourite security speakers came to a conference he wasn’t invited to and gave a lightning talk on how to gain access to a conference using social engineering, showing his press pass and the 4 emails it had taken to get a free ticket to a $3000 conference. Pretty much every mainstream wireless router manufacturer has had some form of embarrassing vulnerability exposed over the last decade and that does not seem to be improving. And with regards to bad user practice combined with poor network hardware security leading to quite chilling results.</p>
 

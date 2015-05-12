@@ -101,11 +101,33 @@ So far we've mainly talked about hacks that target gaining access to your system
 
 ---
 
+## Clowns to the left of me jokers to the right, here I am stuck in the middle with you
+
+## Man-In-The-Middle Attacks
+
+![alt text](http://whimsical-doodles.github.io/img/clown.gif "Link gif")
+
+Another potentially network and potentially higher level attack is acting as a proxy for valid
+communication. This can be particularly problematic as the attack is often invisible until access
+has already been granted with the full users credentials and all communication decrypted. If you
+ever been to a large open source conference you'll have seen listings of "Key-Signing Party"s or
+the like. This face-2-face validated handover of keys is one of the means to protect from someone
+intercepting your traffic and forwarding all further traffic as you but with their keys. Other
+approaches to mitigate this can be down down at the network level with secure dns preventing the
+hijacking of hostnames or at the application level with multiple factor authentication and other
+token based systems.
+
+[Upside-Down-Ternet](https://help.ubuntu.com/community/Upside-Down-TernetHowTo)
+[Quantum cryptography](http://en.wikipedia.org/wiki/Quantum_cryptography)
+
+---
+
 ## Your only as <strong> as your weakest url_for
 
 ### Social engineering and weak link devices
 
-![alt text](https://github.com/Whimsical-Doodles/presentations/raw/master/images/comeatme.gif "Link gif")
+-![alt text](https://github.com/Whimsical-Doodles/presentations/raw/master/images/comeatme.gif "Link
+gif")
 
 The only attack vectors that have a roughly 90% success rate are social engineering and commodity network hardware. One of my favourite security speakers came to a conference he wasn't invited to and gave a lightning talk on how to gain access to a conference using social engineering, showing his press pass and the 4 emails it had taken to get a free ticket to a $3000 conference. Pretty much every mainstream wireless router manufacturer has had some form of embarrassing vulnerability exposed over the last decade and that does not seem to be improving. And with regards to bad user practice combined with poor network hardware security leading to quite chilling results.
 
