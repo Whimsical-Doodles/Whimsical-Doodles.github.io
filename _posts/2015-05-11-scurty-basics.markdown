@@ -26,7 +26,7 @@ Tools like (ze)nmap give you an immediate look at a specific host or network and
 
 ---
 
-## Know your friends, close thine commoners and the revolt your enemy
+## Know your friends, close thine commoners and revolt your enemy
 
 ### fuzz testing
 
