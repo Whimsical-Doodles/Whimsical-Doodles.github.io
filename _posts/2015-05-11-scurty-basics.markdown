@@ -8,7 +8,7 @@
 
 ## A brief introduction to how and why it will go wrong
 
-Security should always be present in your mind because it will be on someone else's. Even if you feel your site or service would not be a target for intentional hacking: do not relax. Many of the high stakes attacks on bank accounts, for instance, frequently start with hacks on low risk, low security sites. You also tend to trust machines within your network more than others, so once in side your firewall, havoc can be wreaked. MyFavouriteKitty.com may not handle your finances but many people use the same email address and a similar enough password to do their banking so hacking one site can mean walking into the next.
+Security should always be present in your mind because it will be on someone else's. Even if you feel your site or service would not be a target for intentional hacking: do not relax. Many of the high stakes attacks on bank accounts, for instance, frequently start with hacks on low risk, low security sites. You also tend to trust machines within your network more than others, so once in side your firewall, havoc can be wrought. MyFavouriteKitty.com may not handle your finances but many people use the same email address and a similar enough password to do their banking so hacking one site can mean walking into the next.
 
 ---
 
