@@ -6,8 +6,8 @@
 </description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 12 May 2015 17:44:33 +0100</pubDate>
-    <lastBuildDate>Tue, 12 May 2015 17:44:33 +0100</lastBuildDate>
+    <pubDate>Mon, 30 Nov 2015 09:36:08 +0100</pubDate>
+    <lastBuildDate>Mon, 30 Nov 2015 09:36:08 +0100</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
     
       <item>
@@ -18,7 +18,7 @@
 
 &lt;h2 id=&quot;a-brief-introduction-to-how-and-why-it-will-go-wrong&quot;&gt;A brief introduction to how and why it will go wrong&lt;/h2&gt;
 
-&lt;p&gt;Security should always be present in your mind because it will be on someone else’s. Even if you feel your site or service would not be a target for intentional hacking: do not relax. Many of the high stakes attacks on bank accounts, for instance, frequently start with hacks on low risk, low security sites. You also tend to trust machines within your network more than others, so once in side your firewall, havoc can be wreaked. MyFavouriteKitty.com may not handle your finances but many people use the same email address and a similar enough password to do their banking so hacking one site can mean walking into the next.&lt;/p&gt;
+&lt;p&gt;Security should always be present in your mind because it will be on someone else’s. Even if you feel your site or service would not be a target for intentional hacking: do not relax. Many of the high stakes attacks on bank accounts, for instance, frequently start with hacks on low risk, low security sites. You also tend to trust machines within your network more than others, so once in side your firewall, havoc can be wrought. MyFavouriteKitty.com may not handle your finances but many people use the same email address and a similar enough password to do their banking so hacking one site can mean walking into the next.&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -36,7 +36,7 @@
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;know-your-friends-close-thine-commoners-and-the-revolt-your-enemy&quot;&gt;Know your friends, close thine commoners and the revolt your enemy&lt;/h2&gt;
+&lt;h2 id=&quot;know-your-friends-close-thine-commoners-and-revolt-your-enemy&quot;&gt;Know your friends, close thine commoners and revolt your enemy&lt;/h2&gt;
 
 &lt;h3 id=&quot;fuzz-testing&quot;&gt;fuzz testing&lt;/h3&gt;
 
@@ -177,7 +177,7 @@ gif&quot; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;the-end&quot;&gt;THE END&lt;/h1&gt;
 </description>
-        <pubDate>Mon, 11 May 2015 00:00:00 +0100</pubDate>
+        <pubDate>Mon, 11 May 2015 00:00:00 +0200</pubDate>
         <link>/2015/05/11/scurty-basics.html</link>
         <guid isPermaLink="true">/2015/05/11/scurty-basics.html</guid>
         
